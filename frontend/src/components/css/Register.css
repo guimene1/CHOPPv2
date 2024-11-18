@@ -1,0 +1,100 @@
+/* Definindo as cores baseadas nas cores fornecidas */
+:root {
+    --cor-1: #FC6D2D;  /* Cor do botão mais intensa */
+    --cor-2: #FC912D;  /* Cor de hover do botão */
+    --cor-3: #FCB12D;  /* Cor da borda dos inputs */
+    --cor-4: #FCCA2D;  /* Cor de foco dos inputs */
+    --cor-5: #FCE32D;  /* Cor dos placeholders */
+    --cor-6: #FFC96E;  /* Cor complementar */
+    --cor-fundo: #2C2C2C;  /* Fundo escuro */
+    --cor-texto: #E0E0E0;  /* Texto mais claro para contraste */
+    --cor-borda: #444444;  /* Cor das bordas */
+}
+
+/* Estilo geral do corpo da página */
+body {
+    background-color: var(--cor-fundo);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: var(--cor-texto);  /* Cor do texto geral */
+}
+
+/* Estilo do formulário */
+form {
+    background-color: #333333;  /* Fundo mais escuro para o formulário */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilo dos campos de entrada (inputs) */
+input {
+    padding: 12px;
+    border: 2px solid var(--cor-borda);
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    background-color: #444444;  /* Cor de fundo escura para os inputs */
+    color: var(--cor-texto);  /* Cor de texto clara */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--cor-4);
+    background-color: #555555;  /* Fundo mais claro quando em foco */
+}
+
+/* Estilo do botão de submit */
+button {
+    background-color: var(--cor-1);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--cor-2);
+}
+
+button:active {
+    background-color: var(--cor-4);
+}
+
+/* Estilo para textos e rótulos */
+input::placeholder {
+    color: var(--cor-5);
+}
+
+h1, h2, p {
+    color: var(--cor-texto);
+}
+
+/* Pequenos ajustes para a responsividade */
+@media (max-width: 500px) {
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    input {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

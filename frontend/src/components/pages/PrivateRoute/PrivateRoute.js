@@ -1,21 +1,16 @@
-// src/components/PrivateRoute.js
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../pages/AuthContext/AuthContext';  // Usando o hook para acessar o contexto
+import { useAuth } from '../../pages/AuthContext/AuthContext'; 
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();  // Acessando o estado de autenticação do contexto
+  const { user, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;  // Enquanto a autenticação está sendo verificada
+    return <div>Loading...</div>;
   }
-
-  // Se o usuário não estiver autenticado, redireciona para a página inicial
   if (!user) {
     return <Navigate to="/" />;
   }
-
-  // Se o usuário estiver autenticado, renderiza o componente protegido
   return children;
 };
 

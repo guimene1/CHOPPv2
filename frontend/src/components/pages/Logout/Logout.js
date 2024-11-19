@@ -1,32 +1,39 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth'; // Método de logout do Firebase
-import { auth } from '../../../firebase'; // Configuração do Firebase
+import { signOut } from 'firebase/auth'; 
+import { auth } from '../../../firebase';
 
 const Logout = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Função para deslogar o usuário
         const handleLogout = async () => {
             try {
-                // Desloga o usuário usando o Firebase
-                await signOut(auth);
+                console.log('Iniciando logout no Firebase...');
+                await signOut(auth); // Logout do Firebase
 
-                // Limpa o localStorage para remover o token, se necessário
-                localStorage.removeItem('token');
+                console.log('Solicitando logout no backend...');
+                const response = await fetch('http://localhost:3001/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include', // Inclui cookies na requisição
+                });
 
-                // Redireciona para a página de login após o logout
-                navigate('/');
+                if (!response.ok) {
+                    throw new Error('Erro ao deslogar no backend');
+                }
+
+                console.log('Logout realizado com sucesso no backend.');
+                localStorage.removeItem('token'); // Remover o token local
+                navigate('/'); // Redirecionar para a página inicial
             } catch (error) {
-                console.error('Erro ao deslogar: ', error);
+                console.error('Erro ao deslogar:', error);
             }
         };
 
-        handleLogout(); // Chama a função para deslogar
+        handleLogout();
     }, [navigate]);
 
-    return <div>Deslogando...</div>; // Pode ser substituído por um spinner ou mensagem amigável
+    return <div>Deslogando...</div>;
 };
 
 export default Logout;

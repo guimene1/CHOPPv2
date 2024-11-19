@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs, setDoc, doc, getDoc } from 'firebase/firestore';
-import { app, auth } from '../../../firebase'; // Certifique-se de que 'app' e 'auth' são as instâncias inicializadas do Firebase
+import { app, auth } from '../../../firebase';
 import './Produtos.css'
-import { Link } from 'react-router-dom';
+import Navegador from '../../navbar/navbar';
 
 const ListaProdutos = () => {
   const [produtos, setProdutos] = useState([]);
-  const [quantidade, setQuantidade] = useState({}); // Estado para armazenar a quantidade de cada produto
+  const [quantidade, setQuantidade] = useState({});
   const db = getFirestore(app);
 
-  // Função para buscar os produtos no Firestore
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
@@ -24,15 +23,13 @@ const ListaProdutos = () => {
     fetchProdutos();
   }, [db]);
 
-  // Função para alterar a quantidade de cada produto
   const handleQuantidadeChange = (id, value) => {
     setQuantidade((prevQuantidade) => ({
       ...prevQuantidade,
-      [id]: Math.max(1, value), // Garante que a quantidade não seja menor que 1
+      [id]: Math.max(1, value),
     }));
   };
 
-  // Função para adicionar o produto ao carrinho
   const adicionarAoCarrinho = async (produto) => {
     const user = auth.currentUser;
     if (!user) {
@@ -41,39 +38,31 @@ const ListaProdutos = () => {
     }
 
     const userId = user.uid;
-    const quantidadeSelecionada = parseInt(quantidade[produto.id]) || 1; // Se a quantidade não estiver definida ou for inválida, assume 1
+    const quantidadeSelecionada = parseInt(quantidade[produto.id]) || 1;
     const novoItem = {
       ...produto,
       quantidade: quantidadeSelecionada,
     };
 
     try {
-      // Verifica se o carrinho já existe
       const carrinhoRef = doc(db, 'carrinho', userId);
       const carrinhoSnap = await getDoc(carrinhoRef);
 
       let itensExistentes = [];
 
       if (carrinhoSnap.exists()) {
-        // Se o carrinho existir, pega os itens existentes
         itensExistentes = carrinhoSnap.data().itens || [];
 
-        // Verifica se o produto já está no carrinho
         const indexProdutoExistente = itensExistentes.findIndex(item => item.id === produto.id);
 
         if (indexProdutoExistente !== -1) {
-          // Se o produto já existe no carrinho, atualiza a quantidade somando o valor
           itensExistentes[indexProdutoExistente].quantidade += quantidadeSelecionada;
         } else {
-          // Se o produto não existe, adiciona ao carrinho
           itensExistentes.push(novoItem);
         }
       } else {
-        // Se o carrinho não existe, cria um novo carrinho com o produto
         itensExistentes = [novoItem];
       }
-
-      // Atualiza o carrinho no Firestore
       await setDoc(carrinhoRef, { itens: itensExistentes }, { merge: true });
 
       alert(`Produto ${produto.nome} adicionado ao carrinho com quantidade: ${quantidadeSelecionada}`);
@@ -84,20 +73,7 @@ const ListaProdutos = () => {
 
   return (
     <div>
-      <div className="nav-bar">
-        <Link to="/carrinho" className="nav-link">
-          Carrinho
-        </Link>
-        <Link to="/novo-produto" className="nav-link">
-          Cadastrar Produto
-        </Link>
-        <Link to="/editarproduto" className="nav-link">
-          Editar produto
-        </Link>
-        <Link to="/listapedidos" className="nav-link">
-          Lista de Pedidos
-        </Link>
-      </div>
+      <Navegador/>
 
       <h2>Lista de Produtos</h2>
       {produtos.length === 0 ? (

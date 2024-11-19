@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getFirestore, doc, updateDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { app } from '../../../firebase';
-import './edit.css'; // Importar o arquivo CSS
+import './edit.css';
+import Navegador from '../../navbar/navbar';
 
 const EditarProduto = () => {
   const [produtos, setProdutos] = useState([]);
@@ -106,7 +107,9 @@ const EditarProduto = () => {
   };
 
   return (
+    
     <div className="container">
+      <Navegador/>
       <h2>Lista de Produtos para Editar</h2>
       {produtos.map((produto) => (
         <div key={produto.id} className="produto-card">

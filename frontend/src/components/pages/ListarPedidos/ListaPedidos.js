@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { app } from '../../../firebase'; // Certifique-se de que 'app' é sua instância inicializada do Firebase.
+import { app } from '../../../firebase';
+import Navegador from '../../navbar/navbar';
 
 const ListaPedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -9,19 +10,13 @@ const ListaPedidos = () => {
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
-        // Criando uma consulta que ordena os pedidos pela data
         const pedidosQuery = query(
           collection(db, 'pedidos'),
-          orderBy('data', 'desc')  // Ordena pela data de forma decrescente (mais recentes primeiro)
+          orderBy('data', 'desc')
         );
-        
-        // Obtendo os pedidos ordenados
         const pedidosSnapshot = await getDocs(pedidosQuery);
-        
-        // Mapeando os pedidos para adicionar o ID e os dados
         const pedidosList = pedidosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        
-        // Atualizando o estado com os pedidos ordenados
+
         setPedidos(pedidosList);
       } catch (error) {
         console.error('Erro ao buscar pedidos:', error);
@@ -31,20 +26,19 @@ const ListaPedidos = () => {
     fetchPedidos();
   }, [db]);
 
-  // Função para calcular o valor total de um pedido
   const calcularTotalPedido = (produtos) => {
     return produtos.reduce((total, produto) => total + (produto.preco * produto.quantidade), 0);
   };
 
   return (
     <div>
+      <Navegador/>
       <h2>Lista de Pedidos</h2>
       {pedidos.length === 0 ? (
         <p>Nenhum pedido encontrado.</p>
       ) : (
         <ul>
           {pedidos.map((pedido) => {
-            // Calculando o total de cada pedido
             const totalPedido = calcularTotalPedido(pedido.produtos);
 
             return (

@@ -3,6 +3,7 @@ import { getFirestore, collection, addDoc, doc, getDoc, setDoc } from 'firebase/
 import { app, auth } from '../../../firebase';
 import './Carrinho.css';
 import { Link } from 'react-router-dom';
+import Navegador from '../../navbar/navbar';
 
 const Carrinho = () => {
     const [carrinho, setCarrinho] = useState([]);
@@ -62,7 +63,6 @@ const Carrinho = () => {
             setPedidoId(docRef.id);
             alert('Pedido realizado com sucesso!');
 
-            // Limpar carrinho após o pedido ser realizado
             await setDoc(doc(db, 'carrinho', user.uid), { itens: [] });
             setCarrinho([]);
         } catch (error) {
@@ -93,7 +93,9 @@ const Carrinho = () => {
     const total = carrinho.reduce((sum, item) => sum + item.preco * item.quantidade, 0);
 
     return (
+        
         <div className="carrinho-container">
+            <Navegador/>
             <h2>Carrinho</h2>
             {carrinho.length === 0 ? (
                 <p>O carrinho está vazio.</p>

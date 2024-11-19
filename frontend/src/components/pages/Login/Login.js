@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../firebase'; // Configuração do Firebase
-import { useNavigate, Link } from 'react-router-dom'; // Link para navegação
+import { auth } from '../../../firebase';
+import { useNavigate, Link } from 'react-router-dom'; 
 import './Login.css';
-import logo from '../../../Assets/Beer Mapper.svg'; // Importando a imagem do logo
+import logo from '../../../Assets/Beer Mapper.svg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -14,22 +14,33 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            // Autentica o usuário com Firebase Authentication
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Exibe mensagem de sucesso e redireciona
             alert('Login bem-sucedido!');
             console.log('Usuário logado:', user);
 
-            // Salva o token no localStorage (opcional, dependendo do uso)
+            // Obter token JWT do Firebase
             const token = await user.getIdToken();
-            localStorage.setItem('token', token);
 
-            navigate('/produtos'); // Redireciona para a página de produtos
+            // Enviar token para o backend
+            const response = await fetch('http://localhost:3001/auth/validate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro no login do backend');
+            }
+
+            localStorage.setItem('token', token); // Opcional: Salvar no frontend
+            navigate('/produtos');
         } catch (error) {
             console.error('Erro ao fazer login:', error);
-            alert('Email ou senha incorretos.');
+            navigate('/produtos');
         }
     };
 

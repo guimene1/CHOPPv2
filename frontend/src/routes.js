@@ -9,15 +9,13 @@ import Carrinho from './components/pages/Carrinho/Carrinho';
 import ListaPedidos from './components/pages/ListarPedidos/ListaPedidos';
 import PrivateRoute from './components/pages/PrivateRoute/PrivateRoute'; // Componente de rota privada
 import EditarProduto from './components/pages/EditarProdutos/EditarProduto';
-import Navbar from './components/pages/Navbar/Navbar';
 import Logout from './components/pages/Logout/Logout';
 import { AuthProvider } from './components/pages/AuthContext/AuthContext';  // Importando o AuthProvider
 
 const RoutesApp = () => {
     return (
-        <AuthProvider> {/* Envolvendo a aplicação com o AuthProvider */}
+        <AuthProvider>
         <Router>
-            <Navbar />
             <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />

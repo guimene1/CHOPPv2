@@ -22,24 +22,30 @@ const ProdutoForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      // Faz o upload das imagens para o Firebase Storage
       const uploadPromises = imagens.map(async (imagem) => {
         const imagemRef = ref(storage, `produtos/${imagem.name}`);
         await uploadBytes(imagemRef, imagem);
-        return getDownloadURL(imagemRef);
+        return getDownloadURL(imagemRef); // Obtém o URL da imagem
       });
 
+      // Espera que todos os uploads terminem
       const imagensUrls = await Promise.all(uploadPromises);
 
+      // Salva os dados do produto no Firestore
       await addDoc(collection(db, 'produtos'), {
         nome,
         tipo,
         descricao,
         preco,
-        imagens: imagensUrls,
+        imagens: imagensUrls, // URLs das imagens carregadas
       });
 
       alert('Produto criado com sucesso!');
+
+      // Reseta os campos do formulário
       setNome('');
       setTipo('');
       setDescricao('');
@@ -54,7 +60,6 @@ const ProdutoForm = () => {
     <div>
       <Navegador />
       <form onSubmit={handleSubmit}>
-
         <input
           type="text"
           placeholder="Nome do Produto"

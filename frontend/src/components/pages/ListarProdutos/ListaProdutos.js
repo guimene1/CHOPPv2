@@ -73,7 +73,7 @@ const ListaProdutos = () => {
 
   return (
     <div>
-      <Navegador/>
+      <Navegador />
 
       <h2>Lista de Produtos</h2>
       {produtos.length === 0 ? (
@@ -88,9 +88,15 @@ const ListaProdutos = () => {
               <p>Preço: R$ {produto.preco}</p>
               <div>
                 {produto.imagens && produto.imagens.map((imagem, index) => (
-                  <img key={index} src={imagem} alt={`Imagem ${index + 1}`} style={{ width: '100px', margin: '10px' }} />
+                  <img
+                    key={index}
+                    src={imagem}
+                    alt={`Imagem ${index + 1}`}
+                    style={{ width: '100px', margin: '10px' }}
+                  />
                 ))}
               </div>
+
               <div>
                 <label htmlFor={`quantidade-${produto.id}`}>Quantidade:</label>
                 <input

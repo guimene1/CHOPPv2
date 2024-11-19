@@ -32,7 +32,7 @@ const ListaPedidos = () => {
 
   return (
     <div>
-      <Navegador/>
+      <Navegador />
       <h2>Lista de Pedidos</h2>
       {pedidos.length === 0 ? (
         <p>Nenhum pedido encontrado.</p>
@@ -60,7 +60,12 @@ const ListaPedidos = () => {
                         <p>Preço Total: R$ {produto.preco * produto.quantidade}</p>
                         <div>
                           {produto.imagens && produto.imagens.map((imagem, idx) => (
-                            <img key={idx} src={imagem} alt={`Imagem ${idx + 1}`} style={{ width: '100px', margin: '10px' }} />
+                            <img
+                              key={idx}
+                              src={imagem}
+                              alt={`Imagem ${idx + 1}`}
+                              style={{ width: '100px', margin: '10px' }}
+                            />
                           ))}
                         </div>
                       </li>

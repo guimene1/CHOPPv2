@@ -37,7 +37,7 @@ const EditarProduto = () => {
     const imagens = Array.from(e.target.files);
     if (imagens.length > 0) {
       const produto = produtos.find(prod => prod.id === produtoId);
-      
+
       // Primeiro, excluir as imagens antigas
       for (let imagemUrl of produto.imagens) {
         const imageRef = ref(storage, imagemUrl);

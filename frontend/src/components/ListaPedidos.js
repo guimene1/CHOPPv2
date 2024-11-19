@@ -14,13 +14,13 @@ const ListaPedidos = () => {
           collection(db, 'pedidos'),
           orderBy('data', 'desc')  // Ordena pela data de forma decrescente (mais recentes primeiro)
         );
-        
+
         // Obtendo os pedidos ordenados
         const pedidosSnapshot = await getDocs(pedidosQuery);
-        
+
         // Mapeando os pedidos para adicionar o ID e os dados
         const pedidosList = pedidosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        
+
         // Atualizando o estado com os pedidos ordenados
         setPedidos(pedidosList);
       } catch (error) {

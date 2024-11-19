@@ -1,0 +1,72 @@
+form {
+    max-width: 600px; /* Aumenta o tamanho do card */
+    margin: 2rem auto;
+    padding: 30px; /* Espaçamento interno aumentado */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espaçamento maior entre os elementos */
+}
+
+form input,
+form textarea,
+form button {
+    width: 95%; /* Inputs alinhados à largura do card */
+    padding: 12px; /* Espaçamento interno maior */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* Cantos mais arredondados */
+    font-size: 1.1rem; /* Tamanho de fonte aumentado */
+}
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #9f904d;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+form textarea {
+    resize: none;
+    height: 100px; /* Maior altura para o campo de texto */
+}
+
+form button {
+    padding: 12px;
+    background-color: #9f904d;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #9f904d;
+}
+
+form input[type="file"] {
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+}
+
+form input[type="file"]::-webkit-file-upload-button {
+    padding: 12px;
+    background-color: #9f904d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #9f904d;
+}

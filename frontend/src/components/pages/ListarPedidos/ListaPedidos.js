@@ -46,7 +46,6 @@ const ListaPedidos = () => {
                 <h3>ID do Pedido: {pedido.id}</h3>
                 <p>Data do Pedido: {new Date(pedido.data).toLocaleString()}</p>
 
-                {/* Exibindo a forma de pagamento */}
                 <p><strong>Forma de Pagamento: </strong>{pedido.formaPagamento}</p>
 
                 <div>
@@ -72,7 +71,7 @@ const ListaPedidos = () => {
                     ))}
                   </ul>
                 </div>
-                <h4>Total da Compra: R$ {totalPedido.toFixed(2)}</h4> {/* Exibindo o total do pedido */}
+                <h4>Total da Compra: R$ {totalPedido.toFixed(2)}</h4>
               </li>
             );
           })}

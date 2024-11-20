@@ -3,10 +3,10 @@ const admin = require('../firebaseAdmin');
 const router = express.Router();
 const { logoutUser } = require('../controller/authController')
 
-// Valida o token enviado pelo frontend
 router.post('/validate', async (req, res) => {
   const { token } = req.body;
 
+  
   if (!token) {
     return res.status(400).json({ message: 'Token não fornecido' });
   }
@@ -20,7 +20,6 @@ router.post('/validate', async (req, res) => {
   }
 });
 
-// Rota de logout
 router.post('/logout', logoutUser);
 
 

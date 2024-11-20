@@ -1,6 +1,5 @@
 const admin = require('../firebaseAdmin');
 
-// Login do usuário
 exports.loginUser = async (req, res) => {
     const { token } = req.body;
 
@@ -15,7 +14,7 @@ exports.loginUser = async (req, res) => {
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 1000 * 60 * 60, // 1 hora
+            maxAge: 1000 * 60 * 60,
         });
 
         res.json({ message: 'Login bem-sucedido!', user: decodedToken });
@@ -29,14 +28,12 @@ exports.logoutUser = (req, res) => {
     try {
         console.log('Requisição de logout recebida');
 
-        // Destroi a sessão do usuário
         req.session.destroy((err) => {
             if (err) {
                 console.error('Erro ao destruir sessão:', err);
                 return res.status(500).json({ message: 'Erro ao fazer logout' });
             }
 
-            // Limpa o cookie de autenticação
             res.clearCookie('token', {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',

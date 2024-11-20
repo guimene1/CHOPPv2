@@ -10,8 +10,8 @@ const Register = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false); // Estado para indicar carregamento
-    const [error, setError] = useState(null); // Estado para mensagens de erro
+    const [loading, setLoading] = useState(false); 
+    const [error, setError] = useState(null); 
     const navigate = useNavigate();
 
     const db = getFirestore(app);
@@ -21,7 +21,6 @@ const Register = () => {
         setLoading(true);
         setError(null);
 
-        // Validação básica dos campos
         if (!nome || !email || !password) {
             setError('Todos os campos são obrigatórios.');
             setLoading(false);
@@ -29,21 +28,20 @@ const Register = () => {
         }
 
         try {
-            // Cria o usuário no Firebase Authentication
+
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Salva os dados do usuário no Firestore
             await setDoc(doc(db, 'users', user.uid), {
                 nome,
                 email,
             });
 
             alert('Usuário registrado com sucesso!');
-            navigate('/'); // Redireciona para a página de login
+            navigate('/');  
         } catch (error) {
             console.error('Erro ao registrar:', error);
-            // Define mensagens de erro mais amigáveis
+
             if (error.code === 'auth/email-already-in-use') {
                 setError('O e-mail já está em uso.');
             } else if (error.code === 'auth/weak-password') {
@@ -64,7 +62,7 @@ const Register = () => {
             <div className="form-container">
                 <form onSubmit={handleRegister}>
                     <h2>Registro</h2>
-                    {error && <p className="error-message">{error}</p>} {/* Exibe mensagens de erro */}
+                    {error && <p className="error-message">{error}</p>} 
                     <input
                         type="text"
                         placeholder="Nome"

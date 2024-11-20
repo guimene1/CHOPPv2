@@ -8,9 +8,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(session(sessionConfig));
 const cors = require('cors');
@@ -21,11 +21,8 @@ app.use(cors({
 }));
 
 
-// Rotas
 app.use('/auth', authRoutes);
 
-
-// Servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });

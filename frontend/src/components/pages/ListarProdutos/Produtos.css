@@ -5,14 +5,12 @@ body {
     background-color: #f5f5f5;
 }
 
-  /* Estilo do título principal */
 h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
-  /* Lista de produtos */
 ul {
     list-style-type: none;
     padding: 0;
@@ -40,7 +38,6 @@ li p {
     color: #555;
 }
 
-  /* Estilo das imagens */
 li img {
     display: inline-block;
     margin: 10px 5px 0 0;
@@ -50,7 +47,6 @@ li img {
     height: auto;
 }
 
-  /* Estilo dos controles de quantidade e botão */
 div label {
     font-size: 14px;
     font-weight: bold;
@@ -77,7 +73,6 @@ div button:hover {
     background-color: #9f904d;
 }
 
-  /* Responsividade */
 @media (max-width: 768px) {
     li {
     padding: 10px;
@@ -95,10 +90,10 @@ div button {
 
 .nav-bar {
     display: flex;
-    justify-content: flex-end; /* Alinha os itens no lado direito */
+    justify-content: flex-end;
     padding: 10px;
-    background-color: #f8f9fa; /* Cor de fundo opcional para a barra */
-    border-bottom: 1px solid #ddd; /* Linha opcional para separar */
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
 }
 
 .nav-link {

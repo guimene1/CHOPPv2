@@ -20,10 +20,8 @@ const Login = () => {
             alert('Login bem-sucedido!');
             console.log('Usuário logado:', user);
 
-            // Obter token JWT do Firebase
             const token = await user.getIdToken();
 
-            // Enviar token para o backend
             const response = await fetch('http://localhost:3001/auth/validate', {
                 method: 'POST',
                 headers: {
@@ -36,7 +34,7 @@ const Login = () => {
                 throw new Error('Erro no login do backend');
             }
 
-            localStorage.setItem('token', token); // Opcional: Salvar no frontend
+            localStorage.setItem('token', token);  
             navigate('/produtos');
         } catch (error) {
             console.error('Erro ao fazer login:', error);

@@ -1,24 +1,24 @@
 form {
-    max-width: 600px; /* Aumenta o tamanho do card */
+    max-width: 600px;  
     margin: 2rem auto;
-    padding: 30px; /* Espaçamento interno aumentado */
+    padding: 30px; 
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Espaçamento maior entre os elementos */
+    gap: 1.5rem;  
 }
 
 form input,
 form textarea,
 form button {
-    width: 95%; /* Inputs alinhados à largura do card */
-    padding: 12px; /* Espaçamento interno maior */
+    width: 95%; 
+    padding: 12px;  
     border: 1px solid #ccc;
-    border-radius: 6px; /* Cantos mais arredondados */
-    font-size: 1.1rem; /* Tamanho de fonte aumentado */
+    border-radius: 6px; 
+    font-size: 1.1rem;  
 }
 
 form input:focus,
@@ -30,7 +30,7 @@ form textarea:focus {
 
 form textarea {
     resize: none;
-    height: 100px; /* Maior altura para o campo de texto */
+    height: 100px; 
 }
 
 form button {

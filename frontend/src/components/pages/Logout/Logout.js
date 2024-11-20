@@ -10,12 +10,12 @@ const Logout = () => {
         const handleLogout = async () => {
             try {
                 console.log('Iniciando logout no Firebase...');
-                await signOut(auth); // Logout do Firebase
+                await signOut(auth);  
 
                 console.log('Solicitando logout no backend...');
                 const response = await fetch('http://localhost:3001/auth/logout', {
                     method: 'POST',
-                    credentials: 'include', // Inclui cookies na requisição
+                    credentials: 'include', 
                 });
 
                 if (!response.ok) {
@@ -23,8 +23,8 @@ const Logout = () => {
                 }
 
                 console.log('Logout realizado com sucesso no backend.');
-                localStorage.removeItem('token'); // Remover o token local
-                navigate('/'); // Redirecionar para a página inicial
+                localStorage.removeItem('token');  
+                navigate('/');  
             } catch (error) {
                 console.error('Erro ao deslogar:', error);
             }

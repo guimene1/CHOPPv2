@@ -24,28 +24,24 @@ const ProdutoForm = () => {
     e.preventDefault();
 
     try {
-      // Faz o upload das imagens para o Firebase Storage
       const uploadPromises = imagens.map(async (imagem) => {
         const imagemRef = ref(storage, `produtos/${imagem.name}`);
         await uploadBytes(imagemRef, imagem);
-        return getDownloadURL(imagemRef); // Obtém o URL da imagem
+        return getDownloadURL(imagemRef);  
       });
 
-      // Espera que todos os uploads terminem
       const imagensUrls = await Promise.all(uploadPromises);
 
-      // Salva os dados do produto no Firestore
       await addDoc(collection(db, 'produtos'), {
         nome,
         tipo,
         descricao,
         preco,
-        imagens: imagensUrls, // URLs das imagens carregadas
+        imagens: imagensUrls, 
       });
 
       alert('Produto criado com sucesso!');
 
-      // Reseta os campos do formulário
       setNome('');
       setTipo('');
       setDescricao('');

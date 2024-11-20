@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/pages/Login/Login';
@@ -7,10 +6,10 @@ import ListaProdutos from './components/pages/ListarProdutos/ListaProdutos';
 import ProdutoForm from './components/pages/ProdutoForm/ProdutoForm';
 import Carrinho from './components/pages/Carrinho/Carrinho';
 import ListaPedidos from './components/pages/ListarPedidos/ListaPedidos';
-import PrivateRoute from './components/pages/PrivateRoute/PrivateRoute'; // Componente de rota privada
+import PrivateRoute from './components/pages/PrivateRoute/PrivateRoute';
 import EditarProduto from './components/pages/EditarProdutos/EditarProduto';
 import Logout from './components/pages/Logout/Logout';
-import { AuthProvider } from './components/pages/AuthContext/AuthContext';  // Importando o AuthProvider
+import { AuthProvider } from './components/pages/AuthContext/AuthContext';
 
 const RoutesApp = () => {
     return (
